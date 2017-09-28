@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<! - - Justin Hurd - ->
+<! - - September 28, 2017 - ->
+<! - - Project 2 - Game v0.2 - ->
+<html>
+	<head>
+		<title>Zoinks Scoob, Let's Like Get Outta Here!</title>
+		<meta http-equiv ="Content-Type" content="text/html;charset=utf-8">
+		<script type = "text/javascript">
+			
+			var originLoc = 0;
+			var score = 0;
+			var navigationErrorCount = 0;
+			var zoinksThreshold = 5;
+
+			var wenttoLoc0 = false;
+			var wenttoLoc1 = false;
+			var wentto2 = false;
+			var wenttoLoc3 = false;
+			var wenttoLoc4 = false;
+
+			function init() {
+				zoinks();
+			}
+			
+			function btnNorth_click() {
+            if (originLoc === 0) {
+               originLoc = 1;
+               zoinks();               
+            } else {
+              if (originLoc === 3) {
+                 originLoc = 0;
+                 zoinks();            
+              } else {
+                 navigationError(); 
+              	}
+           	 }            
+         	}
+
+			function btnSouth_click() {
+			if (originLoc === 1){
+				originLoc = 0;
+				zoinks();
+				} else {
+				if (originLoc === 0){
+					originLoc = 3;
+					zoinks();
+					} else {
+						navigationError();
+					}
+				}
+			}
+
+			function btnEast_click(){
+			if (originLoc === 4){
+				originLoc = 0;
+				zoinks();
+				} else {
+				if (originLoc === 0){
+					originLoc = 2;
+					zoinks();
+					} else {
+						navigationError();
+					}
+				}
+			}
+
+			function btnWest_click(){
+			if (originLoc === 2){
+				originLoc = 0;
+				zoinks();
+				} else {
+				if (originLoc === 0){
+					originLoc = 4;
+					zoinks();
+					} else {
+						navigationError();
+					}
+				}
+			}
+
+			function zoinks(){
+				var desc = "";
+				switch(originLoc){
+					case 0: desc = "Scooby and Shaggy are inside the Haunted Mansion.";
+							break;
+					case 1: desc = "Shaggy and Scooby are spooked.";
+							break;
+					case 2: desc = "Scooby and Shaggy see 9er 49er. Run!";
+							break;
+					case 3: desc = "Shaggy and Scooby are in a secret lair.";
+							break;
+					case 4: desc = "Scooby and Shaggy hear ghostly voices. Gulp.";
+							break;
+					default: desc = "Zoinks! Don't Go, There are monsters that way!";
+				}
+				checkScore();
+				desc = desc + "\n" + "Score: " + score ;
+				displayMessage(desc);
+			}
+
+			function navigationError() {
+				navigationErrorCount = navigationErrorCount + 1;
+				if (navigationErrorCount < zoinksThreshold){
+					displayMessage("Zoinks! Don't Go, There are monsters that way!");
+				} else {
+					displayMessage("Lets Like Get Outta Here Scoooooooooobbbbbb!!!");
+				}
+			}
+
+			function checkScore(){
+				if (! wenttoLoc0){
+					if (originLoc === 0){
+						score = score + 5;
+						wenttoLoc0 = true;
+					}
+				} else if ( (! wenttoLoc1) && (originLoc === 1) ) {
+					score = score + 5;
+					hasVisitedLoc1 = true;
+
+				} else if ( (! wenttoLoc2) && (originLoc === 2) ){
+					score = score + 5;
+					hasVisitedLoc2 = true;
+				} else if ( (! wenttoLoc3) && (originLoc === 3) ){
+					score = score + 5;
+					hasVisitedLoc3 = true;
+				} else if ( (! wenttoLoc4) && (originLoc === 4) ){
+					score = score + 5;
+					hasVisitedLoc4 = true;
+				}
+			}
+
+			function displayMessage(msg){
+				var target = document.getElementById("text");
+				target.value = msg + "\n\n" + target.value;
+			}
+		</script>
+	
+</head>
+
+<body style="background-color: lightgreen"; onload="init();">
+	<img src="mm.jpg" alt="mm" width=750 height=750 align=right>
+	<a href= "mailto:Justin.Hurd1@marist.edu">Justin.Hurd1@marist.edu</a>
+	<h1 style= "color: rgb(0,0,220);">Zoinks Scoob, Lets Like Get Outta Here!</h1>
+	<textarea id="text" rows="20" cols="50"></textarea>
+	<br>
+	<input type="button" value= "North" onclick="btnNorth_click();">
+	<input type="button" value= "East" onclick="btnEast_click();">
+	<input type="button" value= "South" onclick="btnSouth_click();">
+	<input type="button" value= "West" onclick="btnWest_click();">
+</body>
+</html>
