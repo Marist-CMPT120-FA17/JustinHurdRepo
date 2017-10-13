@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<!--Justin Hurd 
+	October 12, 2017
+	Project 2 - Game v0.2 -->
+	
+<html>
+	<head>
+		<title>Justice League</title>
+		<meta http-equiv ="Content-Type" content="text/html;charset=utf-8">
+		<style>
+		body{
+			background-color: black;
+			color: white;
+		}
+		</style>
+	</head>
+		<body>
+			<a href= "mailto:Justin.Hurd1@marist.edu">Justin.Hurd1@marist.edu</a>
+			<h1>Justice League</h1>
+		<script>
+
+			var score = 0;
+			var north = false;
+			var south = false;
+			var west = false;
+			var east = false;
+
+			
+			function northBtnClick() {
+				if(north == false){
+					north = true;
+					score += 5;
+					document.getElementById("msg").value = "Batman enters the batcave.";
+					document.getElementById("score").innerHTML = score;
+				} else {
+					document.getElementById("msg").value = "Joker stole your batmobile HAHAHAHAHAHA";
+				}
+            	}
+            
+            function eastBtnClick(){
+            	if(east == false){
+            		east = true;
+            		score += 5;
+            	document.getElementById("msg").value = "Superman is fighting General Zod in Metropolis.";
+            	document.getElementById("score").innerHTML = score;
+            	}else{
+            	document.getElementById("msg").value = "The Man of Steel meets his Doomsday!";
+            }
+            }
+            
+            function southBtnClick(){
+            		if (south == false){
+            			south = true
+            			score += 5;
+            	document.getElementById("msg").value = "Flash zooms by the Reverse Flash in Central City.";
+            	document.getElementById("score").innerHTML = score;
+          	 	}else{
+          	 		document.getElementById("msg").value = "Iris is going to die! Save her!";
+          	 	}
+          	 	}
+            
+            function westBtnClick(){
+            	if(west ==false){
+            		west = true;
+            		score += 5;
+            	document.getElementById("msg").value = "Wonder Woman uses her shield against Aries.";
+            	document.getElementById("score").innerHTML = score;
+            }else{
+				document.getElementById("msg").value = "Aquaman out of water";
+            }
+      		}
+
+
+     </script>
+		<textarea rows="15" cols="50" id="msg" name="message"> </textarea>
+		<br>
+		<textarea rows="5" cols="5" id="score" name="scoreboard"> </textarea>
+
+		<br>
+		<input type="button" value= "North" onclick="northBtnClick();">
+		<input type="button" value= "East" onclick="eastBtnClick();">
+		<input type="button" value= "South" onclick="southBtnClick();">
+		<input type="button" value= "West" onclick="westBtnClick();">
+	</body>
+</html>
