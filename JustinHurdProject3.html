@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<!--Justin Hurd 
+	October 18, 2017
+	Project 3 - Game v0.4 -->
+	
+<html>
+	<head>
+		<title>Justice League</title>
+		<meta http-equiv ="Content-Type" content="text/html;charset=utf-8">
+		<style>
+		body{
+			background-color: black;
+			color: white;
+		}
+		</style>
+	</head>
+		<body onload="init();">
+			<a href= "mailto:Justin.Hurd1@marist.edu">Justin.Hurd1@marist.edu</a>
+			<h1>Justice League</h1>
+		<script type = "text/javascript">
+
+			var score = 0;
+			var locnorth = false;
+			var locsouth = false;
+			var locwest = false;
+			var loceast = false;
+			var locNE = false;
+			var locSW = false;
+
+			function updateDisplay(message){
+				var textbox = document.getElementById("msg");
+				textbox.value = message;
+			}
+
+			function init(){
+				var message = "Batman enters the batcave.";
+				updateDisplay(message);
+			}
+
+			
+			function northBtn() {
+				if(locnorth == false){
+					locnorth = true;
+					score += 5;
+					var message = "Batman enters the batcave.";
+					updateDisplay(message);
+					document.getElementById("score").innerHTML = score;
+				} else {
+					var message = "Joker stole your batmobile HAHAHAHAHAHA";
+					updateDisplay(message);
+				}
+            }
+            
+            function eastBtn(){
+            	if(loceast == false){
+            		loceast = true;
+            		score += 5;
+            	var message = "Superman is fighting General Zod in Metropolis.";
+            	updateDisplay(message);
+            	document.getElementById("score").innerHTML = score;
+            	}else{
+            	var message = "The Man of Steel meets his Doomsday!";
+            	updateDisplay(message);
+            	}
+            }
+            
+            function southBtn(){
+            		if (locsouth == false){
+            			locsouth = true
+            			score += 5;
+            	var message = "Flash zooms by the Reverse Flash in Central City.";
+            	updateDisplay(message);
+            	document.getElementById("score").innerHTML = score;
+          	 	}else{
+          	 		var message = "Iris is going to die! Save her!";
+          	 		updateDisplay(message);
+          	 	}
+          	 }
+            
+            function westBtn(){
+            	if(locwest ==false){
+            		locwest = true;
+            		score += 5;
+            	var message = "Wonder Woman uses her shield against Aries.";
+            	updateDisplay(message);
+            	document.getElementById("score").innerHTML = score;
+           		}else{
+				var message = "Aries is teleporting around Wonder Woman.";
+				updateDisplay(message);
+            	}
+      		}
+
+      		function NEbtn(){
+      			if(locNE == false){
+      				locNE = true;
+      			score += 5;
+      			var message = "Cyborg is being created by his father."
+      			updateDisplay(message);
+      			document.getElementById("score").innerHTML = score;
+      			}else{
+      			var message = "Cyborg's arm falls off mid fighting."
+      			updateDisplay(message);
+      			}
+      		}
+
+      		function SWbtn(){
+      			if(locSW == false){
+      				locSW = true;
+      				score += 5;
+      				var message = "Aquaman is using his Triton to block the Tsunami."
+      				updateDisplay(message);
+      				document.getElementById("score").innerHTML = score;
+      			}else{
+      				var message = "Aquaman cannot breathe without water.";
+      				updateDisplay(message);
+      			}
+      		}
+
+      		function goBtn() {
+            var userText = document.getElementById("textCommand").value;
+            var display = "";
+            if (userText === "n") {
+                display = northBtn();
+            	} else {
+            	if (userText === "e") {
+                    display = eastBtn();
+                	} else {
+                    if (userText === "s") {
+                        display = southBtn();
+                    	} else {
+                        if (userText === "w") {
+                            display = westBtn();
+                        	} else {
+                        	if(userText === "ne"){
+                        		display = NEbtn();
+                        		}else{
+                        		if(userText === "sw"){
+                        			display = SWbtn();
+                        			}else{
+                        				if(userText === ""){
+                        				display = "Invalid Command: n,e,s,w,ne,sw are valid."
+                        			}
+                        		}
+                        	}
+                        }
+                    }
+                }
+            }
+        	}
+     
+  		</script>
+		<textarea rows="15" cols="50" id="msg" name="message"> </textarea>
+		<br>
+		<textarea rows="5" cols="5" id="score" name="scoreboard"> </textarea>
+		<br>
+		Command:       
+       	<input type="text" id="textCommand" name="textCommand">
+		<input type="button" value="Go" onclick="goBtn();" />
+        <br>
+		<input type="button" value= "North" onclick="northBtn();">
+		<input type="button" value= "East" onclick="eastBtn();">
+		<input type="button" value= "South" onclick="southBtn();">
+		<input type="button" value= "West" onclick="westBtn();">
+		<input type="button" value= "NorthEast" onclick="NEbtn();">
+		<input type="button" value= "SouthWest" onclick="SWbtn();">
+	</body>
+</html>
