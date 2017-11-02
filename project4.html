@@ -1,0 +1,259 @@
+<html>
+  <head>
+    <title>The Dark Knight</title>
+    <meta http-equiv ="Content-Type" content="text/html;charset=utf-8">
+    <style>
+    body{
+      background-color: grey;
+      color: white;
+    }
+    </style>
+  </head>
+    <body onload="init()">
+      <a href= "mailto:Justin.Hurd1@marist.edu">Justin.Hurd1@marist.edu</a>
+      <h1>The Dark Knight</h1>
+
+
+
+    <script src = "location.js"></script>
+    <script type = "text/javascript">
+
+      var startloc = 0;
+      var score = 0;
+      /**
+      var crimeAlley        = false;
+      var batCave           = false;
+      var arkhamAsylum      = false;
+      var wayneManor        = false;
+      var wayneEnterprises  = false;
+      var iceBergLounge     = false;
+      var gcPolice          = false;
+      var blackGate         = false;
+      var arkhamCity        = false;
+      var jokersFunland     = false;
+
+      **/
+      
+
+      function init() {
+        look();
+      }
+
+      function look() {
+            var desc = "";
+            switch (startloc) {
+                case 0: crimeAlley();
+                        break;
+                case 1: batCave();
+                        break;
+                case 2: arkhamAsylum();
+                        break;
+                case 3: wayneManor();
+                        break;
+                case 4: wayneEnterprises();
+                        break;
+                case 5: iceBergLounge();
+                        break;
+                case 6: gcPolice();
+                        break;
+                case 7: blackGate();
+                        break;
+                case 8: arkhamCity();
+                        break;
+                case 9: jokersFunland();
+                        break;
+                default: desc = "You will die if you go that way!!";
+                        break;
+            }
+      }
+
+      function Score() {
+            if (!crimeAlley && startloc === 0){
+                score = score + 5;
+                crimeAlley = true;
+            } else if (!batCave && startloc === 1){
+                score = score + 5;
+                batCave = true;
+            } else if (!arkhamAsylum && startloc === 2){
+                score = score + 5;
+                arkhamAsylum = true;
+            } else if (!wayneManor && startloc === 3){
+                score = score + 5;
+                wayneManor = true;
+            } else if (!wayneEnterprises && startloc === 4){
+                score = score + 5;
+                wayneEnterprises = true;
+            } else if (!iceBergLounge && startloc === 5){
+                score = score + 5;
+                iceBergLounge = true;
+            } else if (!gcPolice && startloc === 6){
+                score = score + 5;
+                gcpolice = true;
+            }else if (!blackGate && startloc === 7){
+                score = score + 5;
+                blackGate = true;
+            }else if (!arkhamCity && startloc === 8){
+                score = score + 5;
+                arkhamCity = true;
+            }else if (!jokersFunland && startloc === 9){
+                score = score + 5;
+                jokersFunland = true;
+            }
+            document.getElementById("score").innerHTML = score;
+        }
+
+
+      function northBtn() {
+        if (startloc === 3) {
+            startloc = 0;
+            look();
+        } else if (startloc === 4) {
+            startloc = 1;
+            look();
+        } else if (startloc === 5) {
+            startloc = 2;
+            look();
+        } else if (startloc === 6) {
+            startloc = 3;
+            look();
+        } else if (startloc === 7) {
+            startloc = 4;
+            look();
+        } else if (startloc === 8) {
+            startloc = 5;
+            look();
+        } else if (startloc === 9) {
+            startloc = 8;
+            look();
+        } else {
+            updateDisplay("You cannot move North.");
+        }
+          Score();
+      }
+
+
+      function southBtn() {
+        if (startloc === 0) {
+            startloc = 3;
+            look();
+        } else if (startloc === 1) {
+            startloc = 4;
+            look();
+        } else if (startloc === 2) {
+            startloc = 5;
+            look();
+        } else if (startloc === 3) {
+            startloc = 6;
+            look();
+        } else if (startloc === 4) {
+            startloc = 7;
+            look();
+        } else if (startloc === 5) {
+            startloc = 8;
+            look();
+        } else if (startloc === 8) {
+            startloc = 9;
+            look();
+        } else {
+            updateDisplay("You cannot move South.");
+        }
+          Score();
+      }
+
+      function eastBtn() {
+        if (startloc === 0) {
+            startloc = 1;
+            look();
+        } else if (startloc === 1) {
+            startloc = 2;
+            look();
+        } else if (startloc === 3) {
+            startloc = 4;
+            look();
+        } else if (startloc === 4) {
+            startloc = 5;
+            look();
+        } else if (startloc === 6) {
+            startloc = 7;
+            look();
+        } else if (startloc === 7) {
+            startloc = 8;
+            look();
+        } else {
+            updateDisplay("You cannot move East.");
+        }
+          Score();
+      }
+
+      function westBtn() {
+        if (startloc === 2) {
+            startloc = 1;
+            look();
+        } else if (startloc === 1) {
+            startloc = 0;
+            look();
+        } else if (startloc === 5) {
+            startloc = 4;
+            look();
+        } else if (startloc === 4) {
+            startloc = 3;
+            look();
+        } else if (startloc === 8) {
+            startloc = 7;
+            look();
+        } else if (startloc === 7) {
+            startloc = 6;
+            look();
+        } else {
+            updateDisplay("You cannot move West.");
+        }
+          Score();
+      }
+  
+      function goBtn() {
+          var userText = document.getElementById("textCommand").value;
+          var response = "";
+          var helpMessage = "Please enter either n, s, e, w, N, S, E, W.";
+          var errorMessage = "Invalid Command.  n,s,e,w,N,S,E,W are valid commands.";
+
+          if (userText === "n" || userText === "N") {
+            response = northBtn();
+          } else if (userText === "s" || userText === "S") {
+            response = southBtn();
+          } else if (userText === "e" || userText === "E") {
+            response = eastBtn();
+          } else if (userText === "w" || userText === "W") {
+            response = westBtn();
+          }else if (userText === "help" || userText === "HELP"){
+            var textarea = document.getElementById("msg");
+            textarea.value = helpMessage;
+          } else {
+            var textarea = document.getElementById("msg");
+            textarea.value = errorMessage;
+          }
+      }
+      
+      function updateDisplay(msg) {
+          var target = document.getElementById("msg");
+          target.value = msg + "\n\n" + target.value;
+      }
+    
+
+  </script>
+
+
+    <textarea rows="15" cols="50" id="msg" name="message"> </textarea>
+    <br>
+    <textarea rows="5" cols="5" id="score" name="scoreboard"> </textarea>
+    Command:       
+    <input type="text" id="textCommand" name="textCommand">
+    <input type="button" id= "go" value="Go" onclick= "goBtn()">
+    <br>
+    <input type="button" id= "north" value= "North" onclick= "northBtn()">
+    <input type="button" id= "east" value= "East" onclick= "eastBtn()">
+    <input type="button" id= "south" value= "South" onclick= "southBtn()">
+    <input type="button" id= "west" value= "West" onclick= "westBtn()">
+    <br>
+    <img src="JustinHurdGotham.jpg" alt="Gotham City" width= "900" height="700">
+  </body>
+</html>
