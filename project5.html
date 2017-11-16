@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Dark Knight</title>
+    <meta http-equiv ="Content-Type" content="text/html;charset=utf-8">
+    <style>
+    body{
+      background-color: black;
+      color: yellow;
+      font-size: 120%;
+    }
+    </style>
+  </head>
+    <body onload="init()">
+      <a href= "mailto:Justin.Hurd1@marist.edu">Justin.Hurd1@marist.edu</a>
+      <h1>The Dark Knight</h1>
+
+    <script src = "location.js"></script>
+    <script type="text/javascript">
+
+
+    crimeAlley = 0;
+    batCave = 1;
+    arkhamAsylum = 2;
+    wayneManor = 3;
+    wayneEnterprises = 4;
+    iceBergLounge = 5;
+    gcPolice = 6;
+    blackGate = 7;
+    arkhamCity = 8;
+    jokersFunland = 9;
+
+    var startLoc = crimeAlley;
+    var inventory = [];
+
+
+    function init() {
+      look();
+
+      
+    }
+
+    function look() {
+      if (startLoc === crimeAlley) {
+        updateDisplay(locations[crimeAlley].desc);
+        crimeAlley_btn();
+      } else if (startLoc === batCave) {
+        updateDisplay(locations[batCave].desc);
+        batCave_btn();
+      } else if (startLoc === arkhamAsylum) {
+        updateDisplay(locations[arkhamAsylum].desc);
+        arkhamAsylum_btn();
+      } else if (startLoc === wayneManor) {
+        updateDisplay(locations[wayneManor].desc);
+        wayneManor_btn();
+      } else if (startLoc === wayneEnterprises) {
+        updateDisplay(locations[wayneEnterprises].desc);
+        wayneEnterprises_btn();
+      } else if (startLoc === iceBergLounge) {
+        updateDisplay(locations[iceBergLounge].desc);
+        iceBergLounge_btn();
+      } else if (startLoc === gcPolice) {
+        updateDisplay(locations[gcPolice].desc);
+        gcPolice_btn();
+      } else if (startLoc === blackGate) {
+        updateDisplay(locations[blackGate].desc);
+        blackGate_btn();
+      } else if (startLoc === arkhamCity) {
+        updateDisplay(locations[arkhamCity].desc);
+        arkhamCity_btn();
+      } else if (startLoc === jokersFunland) {
+        updateDisplay(locations[jokersFunland].desc);
+        jokersFunland_btn();
+      }
+    }
+
+    function northBtn() {
+        if (startLoc === wayneManor) {
+            startLoc = crimeAlley;
+            look();
+        } else if (startLoc === wayneEnterprises) {
+            startLoc = batCave;
+            look();
+        } else if (startLoc === iceBergLounge) {
+            startLoc = arkhamAsylum;
+            look()
+        } else if (startLoc === gcPolice) {
+            startLoc = wayneManor;
+            look();
+        } else if (startLoc === blackGate) {
+            startLoc = wayneEnterprises;
+            look();
+        } else if (startLoc === arkhamCity) {
+            startLoc = iceBergLounge;
+            look();
+        } else if (startLoc === jokersFunland) {
+            startLoc = arkhamCity;
+            look();
+        } else {
+            updateDisplay("You cannot move North.");
+        }
+      }
+
+    function southBtn() {
+        if (startLoc === crimeAlley) {
+            startLoc = wayneManor;
+            look();
+        } else if (startLoc === batCave) {
+            startLoc = wayneEnterprises;
+            look();
+        } else if (startLoc === arkhamAsylum) {
+            startLoc = iceBergLounge;
+            look();
+        } else if (startLoc === wayneManor) {
+            startLoc = gcPolice;
+            look();
+        } else if (startLoc === wayneEnterprises) {
+            startLoc = blackGate;
+            look();
+        } else if (startLoc === iceBergLounge) {
+            startLoc = arkhamCity;
+            look();
+        } else if (startLoc === arkhamCity) {
+            startLoc = jokersFunland;
+            look();
+        } else {
+            updateDisplay("You cannot move South.");
+        }
+    }
+
+    function eastBtn() {
+        if (startLoc === crimeAlley) {
+            startLoc = batCave;
+            look();
+        } else if (startLoc === batCave) {
+            startLoc = arkhamAsylum;
+            look();
+        } else if (startLoc === wayneManor) {
+            startLoc = wayneEnterprises;
+            look();
+        } else if (startLoc === wayneEnterprises) {
+            startLoc = iceBergLounge;
+            look();
+        } else if (startLoc === gcPolice) {
+            startLoc = blackGate;
+            look();
+        } else if (startLoc === blackGate) {
+            startLoc = arkhamCity;
+            look();
+        } else {
+            updateDisplay("You cannot move East.");
+        }
+    }
+
+      function westBtn() {
+          if (startLoc === arkhamAsylum) {
+              startLoc = batCave;
+              look();
+          } else if (startLoc === batCave) {
+              startLoc = crimeAlley;
+              look();
+          } else if (startLoc === iceBergLounge) {
+              startLoc = wayneEnterprises;
+              look();
+          } else if (startLoc === wayneEnterprises) {
+              startLoc = wayneManor;
+              look();
+          } else if (startLoc === arkhamCity) {
+              startLoc = blackGate;
+              look();
+          } else if (startLoc === blackGate) {
+              startLoc = gcPolice;
+              look();
+          } else {
+              updateDisplay("You cannot move West.");
+          }
+        }
+
+
+    function takeBtn() {
+      var taken = false;
+
+      for (g in gadgets) {
+        if (gadgets[g].location === startLoc && gadgets[g].isTaken === false) {
+          inventory.push(gadgets[g]);
+          gadgets[g].isTaken = true;
+          taken = true;
+          updateDisplay("The item " + gadgets[g].name + " was added to your inventory");
+          updateDisplay(gadgets[g].desc);
+        }
+      }
+      if (taken === false) {
+        updateDisplay("No gadget was found at this location");
+      }
+    }
+    
+    function checkInventoryBtn() {
+      if (inventory.length > 0) {
+        updateDisplay("Your inventory contains: ");
+        for (i in inventory) {
+          updateDisplay(inventory[i].name);
+        }
+      } else {
+        updateDisplay("You do not have any items in your inventory");
+      }
+    }
+
+
+    function goBtn() {
+          var userText = document.getElementById("textCommand").value;
+          var response = "";
+          var helpMessage = "Please enter a valid command of n, s, e, w, i, t, N, S, E, W, I, T.";
+          var errorMessage = "Invalid Command.  n,s,e,w,i,t,N,S,E,W,I,T. are valid commands.";
+
+        if (userText === "n" || userText === "N") {
+            response = northBtn();
+        } else if (userText === "s" || userText === "S") {
+            response = southBtn();
+        } else if (userText === "e" || userText === "E") {
+            response = eastBtn();
+        } else if (userText === "w" || userText === "W") {
+            response = westBtn();
+        }else if (userText === "help" || userText === "HELP"){
+            var textarea = document.getElementById("msg");
+            textarea.value = helpMessage;
+        }else if (userText === "i" || userText === "I"){
+            var textarea = document.getElementById("msg");
+            textarea.value = checkInventoryBtn();
+        }else if (userText === "t" || userText === "T"){
+            var textarea = document.getElementById("msg");
+            textarea.value = takeBtn();
+        } else {
+            var textarea = document.getElementById("msg");
+            textarea.value = errorMessage;
+        }
+      }
+      
+      function updateDisplay(msg) {
+          var target = document.getElementById("msg");
+          target.value = msg + "\n\n" + target.value;
+      }
+
+
+
+
+
+
+
+    </script>
+    <textarea rows="15" cols="50" id="msg" name="message"> </textarea>
+    <br>
+    Command:       
+    <input type="text" id="textCommand" name="textCommand">
+    <input type="button" id= "go" value="Go" onclick= "goBtn()">
+    <br>
+    <input type="button" id= "north" value= "North" onclick= "northBtn()">
+    <input type="button" id= "east" value= "East" onclick= "eastBtn()">
+    <input type="button" id= "south" value= "South" onclick= "southBtn()">
+    <input type="button" id= "west" value= "West" onclick= "westBtn()">
+    <br>
+    <input type="button" id= "take" value= "Take Gadget" onclick= "takeBtn()">
+    <input type="button" id= "checkInventory" value= "Check Inventory" onclick= "checkInventoryBtn()">
+    <br>
+    <img src="JustinHurdGotham.jpg" alt="Gotham City" width= "900" height="700">
+  </body>
+</html>
